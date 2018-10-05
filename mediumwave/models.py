@@ -40,7 +40,7 @@ class Network(models.Model):
 
 class Transmitter(models.Model):
     transmitter_name = models.CharField(max_length=64)
-    transmitter_slug = AutoSlugField(populate_from='title')
+    transmitter_slug = AutoSlugField(populate_from='transmitter_name')
     lat = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
 

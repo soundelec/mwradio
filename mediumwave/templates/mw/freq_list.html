@@ -12,7 +12,7 @@
             {% for freq in frequencies %}
                 <h2 class="title"><a href="/freq/{{freq.grouper}}/">{{freq.grouper}} kHz</a></h2>
                 {% for station in freq.list %}
-                <p><a href="/detail/{{station.pk}}/"><i class="fa fa-info-circle" aria-hidden="true"></i></a> <span class="country" title="{{station.country}}"><img src="{% static "img/flags_iso/" %}{{station.country.iso}}.png"> {{station.country.iso}}</span> <strong><a href="/station/{{station.station_name}}/">{{station.station_name}}</a></strong> <em>{{station.location}}</em> {{station.transmitter}} ({{station.power.normalize}}kW)
+                <p><a href="/detail/{{station.pk}}/"><i class="fa fa-info-circle" aria-hidden="true"></i></a> <span class="country" title="{{station.country}}"><img src="{% static "img/flags_iso/" %}{{station.country.iso}}.png"> {{station.country.iso}}</span> <strong><a href="/station/{{station.station_name.network_slug}}/">{{station.station_name}}</a></strong> <em>{{station.location}}</em> {{station.transmitter}} ({{station.power.normalize}}kW)
                 </p>
             {% endfor %}
         {% endfor %}

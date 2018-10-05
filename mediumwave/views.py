@@ -68,7 +68,8 @@ class StationView(ListView):
     def get_context_data(self, **kwargs):
         stn_filter = str(self.kwargs['stnurl'])
         context = super(StationView, self).get_context_data(**kwargs)
-        context['station'] = Station.objects.filter(station_name__network_name=stn_filter).order_by('freq__freq')
+        #context['station'] = Station.objects.filter(station_name__network_name=stn_filter).order_by('freq__freq')
+        context['station'] = Station.objects.filter(station_name__network_slug=stn_filter).order_by('freq__freq')
         context['widgets'] = TextItem.objects.order_by('sortorder')
         return context
 
