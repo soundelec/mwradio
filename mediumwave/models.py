@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils import timezone
+from django.template.defaultfilters import slugify
 
 class Frequency(models.Model):
     freq = models.IntegerField()
 
     class Meta:
-        verbose_name_plural = 'frequencies'
+        verbose_name_plural = 'frequencies' # Stop the annoying 'frequencys' in the django admin!
 
     def publish(self):
         self.save()
@@ -18,7 +19,7 @@ class Country(models.Model):
     full_name = models.CharField(max_length=32, null=True)
 
     class Meta:
-        verbose_name_plural = 'countries'
+        verbose_name_plural = 'countries' # It's not 'countrys'
 
     def publish(self):
         self.save()
@@ -28,8 +29,10 @@ class Country(models.Model):
 
 class Network(models.Model):
     network_name = models.CharField(max_length=64)
+    network_slug = models.SlugField()
 
     def publish(self):
+        self.network_slug = slugify(self.network_name) # Generate slug from network name
         self.save()
 
     def __str__(self):
@@ -37,10 +40,12 @@ class Network(models.Model):
 
 class Transmitter(models.Model):
     transmitter_name = models.CharField(max_length=64)
+    transmitter_slug = models.SlugField()
     lat = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
 
     def publish(self):
+        self.transmitter_slug = slugify(self.transmitter_name) # Generate slug from transmitter name
         self.save()
 
     def __str__(self):
@@ -61,7 +66,7 @@ class Station(models.Model):
     def __str__(self):
         return str(self.freq) + ": " + str(self.station_name) + " - " + str(self.transmitter)
 
-class TextItem(models.Model):
+class TextItem(models.Model): # These are the little posts on the sidebar
     sortorder = models.IntegerField()
     heading = models.CharField(max_length=128)
     bodytext = models.TextField()
