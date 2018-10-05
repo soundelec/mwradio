@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.template.defaultfilters import slugify
+from autoslug import AutoSlugField
 
 class Frequency(models.Model):
     freq = models.IntegerField()
@@ -29,10 +30,9 @@ class Country(models.Model):
 
 class Network(models.Model):
     network_name = models.CharField(max_length=64)
-    network_slug = models.SlugField(blank=True)
+    network_slug = AutoSlugField(populate_from='network_name')
 
     def publish(self):
-        self.network_slug = slugify(self.network_name) # Generate slug from network name
         self.save()
 
     def __str__(self):
@@ -40,12 +40,11 @@ class Network(models.Model):
 
 class Transmitter(models.Model):
     transmitter_name = models.CharField(max_length=64)
-    transmitter_slug = models.SlugField(blank=True)
+    transmitter_slug = AutoSlugField(populate_from='title')
     lat = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
 
     def publish(self):
-        self.transmitter_slug = slugify(self.transmitter_name) # Generate slug from transmitter name
         self.save()
 
     def __str__(self):
