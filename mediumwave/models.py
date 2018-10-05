@@ -29,7 +29,7 @@ class Country(models.Model):
 
 class Network(models.Model):
     network_name = models.CharField(max_length=64)
-    network_slug = models.SlugField()
+    network_slug = models.SlugField(blank=True)
 
     def publish(self):
         self.network_slug = slugify(self.network_name) # Generate slug from network name
@@ -40,7 +40,7 @@ class Network(models.Model):
 
 class Transmitter(models.Model):
     transmitter_name = models.CharField(max_length=64)
-    transmitter_slug = models.SlugField()
+    transmitter_slug = models.SlugField(blank=True)
     lat = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
 
