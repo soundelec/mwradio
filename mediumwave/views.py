@@ -80,7 +80,7 @@ class CountryView(ListView):
     def get_context_data(self, **kwargs):
         stn_filter = str(self.kwargs['countryurl'])
         context = super(CountryView, self).get_context_data(**kwargs)
-        context['station'] = Station.objects.filter(country__full_name=stn_filter).order_by('freq__freq', 'station_name__network_name', '-power', 'country__full_name')
+        context['station'] = Station.objects.filter(country__country_slug=stn_filter).order_by('freq__freq', 'station_name__network_name', '-power', 'country__full_name')
         context['widgets'] = TextItem.objects.order_by('sortorder')
         return context
 

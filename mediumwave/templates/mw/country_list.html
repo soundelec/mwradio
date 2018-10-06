@@ -4,6 +4,6 @@
     <h5>You are here: <a href="/">Home</a> / Countries</h5>
             {% load static %}
             {% for country in countries %}
-                <h2><img src="{% static "img/flags_iso_64/" %}{{country.iso}}.png"><a href="/country/{{country.full_name}}/">&nbsp;&nbsp;{{country.full_name}}</a></h2>
+                <h2><img src="{% static "img/flags_iso_64/" %}{{country.iso}}.png"><a href="/country/{{country.country_slug}}/">&nbsp;&nbsp;{{country.full_name}}</a></h2>
             {% endfor %}
 {% endblock %}

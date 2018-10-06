@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.template.defaultfilters import slugify
+#from django.template.defaultfilters import slugify
 from autoslug import AutoSlugField
 
 class Frequency(models.Model):
@@ -18,6 +18,7 @@ class Frequency(models.Model):
 class Country(models.Model):
     iso = models.CharField(max_length=3)
     full_name = models.CharField(max_length=32, null=True)
+    country_slug = AutoSlugField(populate_from='iso')
 
     class Meta:
         verbose_name_plural = 'countries' # It's not 'countrys'
