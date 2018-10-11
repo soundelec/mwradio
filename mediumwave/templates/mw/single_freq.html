@@ -7,7 +7,7 @@
                 <h3>Location map</h3>
                 <div id="txmap" style="width: 700px; height: 400px;">
                 <script>
-                
+
                 // get list of transmitters in array
                 var transmitters = [
                 {% for station in station %}
@@ -16,10 +16,10 @@
                     {% endif %}
                 {% endfor %}
                 ]
-                
+
                 // define the map itself
                 var map = L.map('txmap').setView([53, 23], 3); // centre of Europe (ish!)
-                mapLink = 
+                mapLink =
                 '<a href="http://openstreetmap.org">OpenStreetMap</a>';
                 L.tileLayer(
                 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiaW9uYWsiLCJhIjoiY2o1NzJsZHhuMXM3dzJ4cWxiMnBteWkxaSJ9.nJkz62TdDvWDv8CBQboHxg', {
@@ -36,7 +36,7 @@
                 .bindPopup(transmitters[i][0])
                 .addTo(map);
                 }
-                
+
                 // zoom map to fit transmitter co-ordinates
                 map.fitBounds([
                 {% for station in station %}
@@ -46,12 +46,12 @@
                 {% endfor %}
                 ],
                 {padding: [40, 40]}); // stop transmitters from being cut off at the north edge
-                
+
                 </script>
                 </div>
                 <p>
-                {% for station in station %}            
-                <p><a href="/detail/{{station.pk}}/"><i class="fa fa-info-circle" aria-hidden="true"></i></a> <span class="country" title="{{station.country}}"><img src="{% static "img/flags_iso/" %}{{station.country.iso}}.png"> {{station.country.iso}}</span> <strong>{{station.freq}} kHz <a href="/station/{{station.station_name}}">{{station.station_name}}</a></strong> <em>{{station.location}}</em> {{station.transmitter}} ({{station.power.normalize}}kW)
+                {% for station in station %}
+                <p><a href="{{ station.get_absolute_url }}"><i class="fa fa-info-circle" aria-hidden="true"></i></a> <span class="country" title="{{station.country}}"><img src="{% static "img/flags_iso/" %}{{station.country.iso}}.png"> {{station.country.iso}}</span> <strong>{{station.freq}} kHz <a href="/station/{{station.station_name}}">{{station.station_name}}</a></strong> <em>{{station.location}}</em> {{station.transmitter}} ({{station.power.normalize}}kW)
                 {% if station.transmitter.lat is None %}
                  *
                 {% endif %}

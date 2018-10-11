@@ -60,6 +60,9 @@ class Station(models.Model):
     power = models.DecimalField(max_digits=12, decimal_places=3)
     details = models.TextField(blank=True)
 
+    def get_absolute_url(self):
+        return "/detail/%i/" % self.pk
+
     def publish(self):
         self.save()
 
