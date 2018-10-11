@@ -40,8 +40,6 @@ urlpatterns = [
     views.StationDetail.as_view(),
     name="station_detail"
         ),
-    url(r'^search/$',
-    views.StationSearchListView.as_view(),
-    name="station_search"),
+    url(r'^search/', include('haystack.urls')),
     url(r'^about/$', views.about, name='about'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

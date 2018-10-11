@@ -1,0 +1,4 @@
+{{ object.station_name.network_name }}
+{{ object.freq }}
+{{ object.location }}
+{{ object.transmitter }}
