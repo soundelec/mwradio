@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
-#from django.template.defaultfilters import slugify
 from autoslug import AutoSlugField
+from markdownx.models import MarkdownxField
 
 class Frequency(models.Model):
     freq = models.IntegerField()
@@ -79,3 +79,16 @@ class TextItem(models.Model): # These are the little posts on the sidebar
 
     def __str__(self):
         return self.heading
+
+class Page(models.Model): # These are info pages like 'about' and 'links'
+    title = models.CharField(max_length=128)
+    slug = models.CharField(max_length=128)
+    subtitle = models.CharField(max_length=512)
+    text = MarkdownxField()
+    sortorder = models.IntegerField()
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.title

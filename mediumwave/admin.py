@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Frequency, Country, Network, Transmitter, Station, TextItem
+from .models import Frequency, Country, Network, Transmitter, Station, TextItem, Page
 
 class FrequencyAdmin(admin.ModelAdmin):
     ordering = ('freq',)
@@ -26,3 +26,7 @@ admin.site.register(Station, StationAdmin)
 class TextItemAdmin(admin.ModelAdmin):
     ordering = ('heading',)
 admin.site.register (TextItem, TextItemAdmin)
+
+class PageAdmin(admin.ModelAdmin):
+    ordering = ('sortorder',)
+admin.site.register (Page, PageAdmin)

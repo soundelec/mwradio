@@ -40,6 +40,11 @@ urlpatterns = [
     views.StationDetail.as_view(),
     name="station_detail"
         ),
+    url(r'^page/(?P<slug>.+)/$',
+    views.PageView.as_view(),
+    name="page"
+        ),
     url(r'^search/', include('haystack.urls')),
     url(r'^about/$', views.about, name='about'),
+    url(r'^markdownx/', include('markdownx.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

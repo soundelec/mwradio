@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Station, Network, Frequency, Country, Transmitter, TextItem
+from .models import Station, Network, Frequency, Country, Transmitter, TextItem, Page
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.http import HttpResponse
@@ -92,6 +92,17 @@ class StationDetail(DetailView):
         stn_filter = self.kwargs['pk']
         context = super(DetailView, self).get_context_data(**kwargs)
         context['station'] = Station.objects.get(pk=self.kwargs.get('pk'))
+        context['widgets'] = TextItem.objects.order_by('sortorder')
+        return context
+
+class PageView(DetailView):
+    template_name = 'mw/page.html'
+    queryset = Page.objects.order_by('sortorder')
+
+    def get_context_data(self, **kwargs):
+        stn_filter = self.kwargs['slug']
+        context = super(DetailView, self).get_context_data(**kwargs)
+        context['page'] = Page.objects.get(slug=self.kwargs.get('slug'))
         context['widgets'] = TextItem.objects.order_by('sortorder')
         return context
 

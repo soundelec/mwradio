@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'markdownx',
+    'markdownify',
     'haystack',
     'mediumwave',
 ]
@@ -109,6 +111,26 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+MARKDOWNIFY_WHITELIST_TAGS = [
+  'a',
+  'abbr',
+  'acronym',
+  'b',
+  'blockquote',
+  'em',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'i',
+  'li',
+  'ol',
+  'p',
+  'strong',
+  'ul'
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
