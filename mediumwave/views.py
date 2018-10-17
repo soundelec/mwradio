@@ -15,6 +15,7 @@ class IndexView(ListView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['stations'] = Station.objects.filter(freq__freq__gte=300).order_by('freq__freq', 'country__iso', 'station_name__network_name', '-power')
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 class StationList(ListView):
@@ -26,6 +27,7 @@ class StationList(ListView):
         context = super(StationList, self).get_context_data(**kwargs)
         context['stations'] = Station.objects.order_by('station_name__network_name', 'freq__freq', '-power')
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 class CountryList(ListView):
@@ -37,6 +39,7 @@ class CountryList(ListView):
         context = super(CountryList, self).get_context_data(**kwargs)
         context['countries'] = Country.objects.order_by('full_name')
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 class LWList(ListView):
@@ -48,6 +51,7 @@ class LWList(ListView):
         context = super(LWList, self).get_context_data(**kwargs)
         context['stations'] = Station.objects.filter(freq__freq__lt=300).order_by('freq__freq', 'country__iso', 'station_name__network_name', '-power')
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 class FreqView(ListView):
@@ -59,6 +63,7 @@ class FreqView(ListView):
         context = super(FreqView, self).get_context_data(**kwargs)
         context['station'] = Station.objects.filter(freq__freq=freq_filter).order_by('station_name__network_name')
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 class StationView(ListView):
@@ -71,6 +76,7 @@ class StationView(ListView):
         #context['station'] = Station.objects.filter(station_name__network_name=stn_filter).order_by('freq__freq')
         context['station'] = Station.objects.filter(station_name__network_slug=stn_filter).order_by('freq__freq')
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 class CountryView(ListView):
@@ -82,6 +88,7 @@ class CountryView(ListView):
         context = super(CountryView, self).get_context_data(**kwargs)
         context['station'] = Station.objects.filter(country__country_slug=stn_filter).order_by('freq__freq', 'station_name__network_name', '-power', 'country__full_name')
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 class StationDetail(DetailView):
@@ -93,6 +100,7 @@ class StationDetail(DetailView):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['station'] = Station.objects.get(pk=self.kwargs.get('pk'))
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 class PageView(DetailView):
@@ -104,6 +112,7 @@ class PageView(DetailView):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['page'] = Page.objects.get(slug=self.kwargs.get('slug'))
         context['widgets'] = TextItem.objects.order_by('sortorder')
+        context['pages'] = Page.objects.order_by('sortorder')
         return context
 
 def about(request):

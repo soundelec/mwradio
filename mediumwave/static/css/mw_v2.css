@@ -1,18 +1,25 @@
 .navbar {
-    background-color: #330033;
+    background-color: #222;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Bitter', sans-serif;
+  color: #eee;
 }
 
 body {
+    background-color: #161925;
     padding-top: 5rem;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Lora', serif;
 }
 
 p {
     margin-bottom: 0.5em;
+    color: #9590a8;
 }
 
 a:link {
-    color: #330033;
+    color: #bbcbcb;
 }
 
 a:visited {
@@ -25,7 +32,7 @@ a:hover {
 }
 
 .widget {
-    background-color: #ddd;
+    background-color: #161925;
     margin-bottom: 20px;
     padding: 0px 10px 10px 10px;
 }
@@ -34,13 +41,13 @@ a:hover {
 }
 
 .title {
-    border-bottom: 2px solid #330033;
+    border-bottom: 2px solid #634b66;
 }
 
 .country {
     font-family: 'Inconsolata', monospace;
-    background-color: #330033;
-    color: #bbb;
+    background-color: #656c88;
+    color: #000;
     font-size: 9pt;
     padding: 5px;
     border-radius: 4px;
@@ -59,9 +66,10 @@ a:hover {
     /* Set the fixed height of the footer here */
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
-    background-color: #fff;
+    background-color: #222;
     margin-top: 20px;
-    border-top: #ddd 1px solid;
+    border-top: #000 1px solid;
+    border-bottom: #000 1px solid;
 }
 
 .no-gutter > [class*='col-'] {

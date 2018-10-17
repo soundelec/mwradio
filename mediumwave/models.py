@@ -58,7 +58,8 @@ class Station(models.Model):
     location = models.CharField(max_length=64, blank=True)
     transmitter = models.ForeignKey('Transmitter', on_delete=models.DO_NOTHING)
     power = models.DecimalField(max_digits=12, decimal_places=3)
-    details = models.TextField(blank=True)
+    notes = models.CharField(max_length=256, blank=True)
+    details = MarkdownxField(blank=True)
 
     def get_absolute_url(self):
         return "/detail/%i/" % self.pk
@@ -72,7 +73,7 @@ class Station(models.Model):
 class TextItem(models.Model): # These are the little posts on the sidebar
     sortorder = models.IntegerField()
     heading = models.CharField(max_length=128)
-    bodytext = models.TextField()
+    bodytext = MarkdownxField()
 
     def publish(self):
         self.save()
