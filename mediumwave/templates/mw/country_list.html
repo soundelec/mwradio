@@ -1,9 +1,0 @@
-{% extends 'mw/base.html' %}
-{% block title %}European Mediumwave Station Guide - Countries{% endblock %}
-{% block content %}
-    <h5>You are here: <a href="/">Home</a> / Countries</h5>
-            {% load static %}
-            {% for country in countries %}
-                <h2><img src="{% static "img/flags_iso_64/" %}{{country.iso}}.png"><a href="/country/{{country.country_slug}}/">&nbsp;&nbsp;{{country.full_name}}</a></h2>
-            {% endfor %}
-{% endblock %}

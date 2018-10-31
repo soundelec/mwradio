@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Station, Network, Frequency, Country, Transmitter, TextItem, Page
+from .models import Station, Network, Frequency, Transmitter, TextItem, Page
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.http import HttpResponse
@@ -13,7 +13,7 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['stations'] = Station.objects.filter(freq__freq__gte=300).order_by('freq__freq', 'country__iso', 'station_name__network_name', '-power')
+        context['stations'] = Station.objects.filter(freq__freq__gte=300).order_by('freq__freq', 'transmitter__iso', 'station_name__network_name', '-power')
         context['widgets'] = TextItem.objects.order_by('sortorder')
         context['pages'] = Page.objects.order_by('sortorder')
         return context
@@ -30,17 +30,17 @@ class StationList(ListView):
         context['pages'] = Page.objects.order_by('sortorder')
         return context
 
-class CountryList(ListView):
-    context_object_name = 'country_list'
-    template_name = 'mw/country_list.html'
-    queryset = Country.objects.order_by('full_name')
+#class CountryList(ListView):
+#    context_object_name = 'country_list'
+#    template_name = 'mw/country_list.html'
+#    queryset = Country.objects.order_by('full_name')
 
-    def get_context_data(self, **kwargs):
-        context = super(CountryList, self).get_context_data(**kwargs)
-        context['countries'] = Country.objects.order_by('full_name')
-        context['widgets'] = TextItem.objects.order_by('sortorder')
-        context['pages'] = Page.objects.order_by('sortorder')
-        return context
+#    def get_context_data(self, **kwargs):
+#        context = super(CountryList, self).get_context_data(**kwargs)
+#        context['countries'] = Country.objects.order_by('full_name')
+#        context['widgets'] = TextItem.objects.order_by('sortorder')
+#        context['pages'] = Page.objects.order_by('sortorder')
+#        return context
 
 class LWList(ListView):
     context_object_name = 'freq_list'

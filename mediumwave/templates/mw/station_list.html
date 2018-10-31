@@ -6,7 +6,7 @@
             {% for station_name in stationnames %}
                 <h2 class="title"><a href="/station/{{station_name.grouper}}">{{station_name.grouper}}</a></h2>
                 {% for station in station_name.list %}
-                <p><a href="{{ station.get_absolute_url }}"><i class="fa fa-info-circle" aria-hidden="true"></i></a> <span class="country" title="{{station.country}}"><img src="https://static.mwradio.eu/img/flags_iso/{{station.country.iso}}.png"> {{station.country.iso}}</span> <strong><a href="/freq/{{station.freq}}">{{station.freq}} kHz</a></strong> <em>{{station.location}}</em> {{station.transmitter}} ({{station.power.normalize}}kW)
+                <p><a href="{{ station.get_absolute_url }}"><i class="fa fa-info-circle" aria-hidden="true"></i></a> <span class="country" title="{{station.transmitter.country_name}}"><img src="{% static "img/flags_iso/" %}{{station.transmitter.iso}}.png"> {{station.transmitter.iso}}</span> <strong><a href="/freq/{{station.freq}}">{{station.freq}} kHz</a></strong> <em>{{station.location}}</em> {{station.transmitter}} ({{station.power.normalize}}kW)
                 </p>
             {% endfor %}
         {% endfor %}

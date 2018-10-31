@@ -16,10 +16,10 @@ urlpatterns = [
     views.StationList.as_view(),
     name="station_list"
         ),
-    url(r'^country/$',
-    views.CountryList.as_view(),
-    name="country_list"
-        ),
+    #url(r'^country/$',
+    #views.CountryList.as_view(),
+    #name="country_list"
+    #    ),
     url(r'^lw/$',
     views.LWList.as_view(),
     name="freq_list"
@@ -32,10 +32,10 @@ urlpatterns = [
     views.StationView.as_view(),
     name="single_station"
         ),
-    url(r'^country/(?P<countryurl>.+)/$',
-    views.CountryView.as_view(),
-    name="single_country"
-        ),
+    #url(r'^country/(?P<countryurl>.+)/$',
+    #views.CountryView.as_view(),
+    #name="single_country"
+    #    ),
     url(r'^detail/(?P<pk>.+)/$',
     views.StationDetail.as_view(),
     name="station_detail"

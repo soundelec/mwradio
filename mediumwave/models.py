@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from autoslug import AutoSlugField
 from markdownx.models import MarkdownxField
+from .geo import get_country, get_country_name
 
 class Frequency(models.Model):
     freq = models.IntegerField()
@@ -15,19 +16,19 @@ class Frequency(models.Model):
     def __str__(self):
         return str(self.freq)
 
-class Country(models.Model):
-    iso = models.CharField(max_length=3)
-    full_name = models.CharField(max_length=32, null=True)
-    country_slug = AutoSlugField(populate_from='iso')
-
-    class Meta:
-        verbose_name_plural = 'countries' # It's not 'countrys'
-
-    def publish(self):
-        self.save()
-
-    def __str__(self):
-        return str(self.full_name)
+#class Country(models.Model):
+#    iso = models.CharField(max_length=3)
+#    full_name = models.CharField(max_length=32, null=True)
+#    country_slug = AutoSlugField(populate_from='iso')
+#
+#    class Meta:
+#        verbose_name_plural = 'countries' # It's not 'countrys'
+#
+#    def publish(self):
+#        self.save()
+#
+#    def __str__(self):
+#        return str(self.full_name)
 
 class Network(models.Model):
     network_name = models.CharField(max_length=64)
@@ -44,16 +45,22 @@ class Transmitter(models.Model):
     transmitter_slug = AutoSlugField(populate_from='transmitter_name')
     lat = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
     lon = models.DecimalField(max_digits=12, decimal_places=6, blank=True, null=True)
+    iso = models.CharField(max_length=3, blank=True) # obtained from the lat/lon
+    country_name = models.CharField(max_length=64, blank=True)
 
-    def publish(self):
-        self.save()
+    def save(self, *args, **kwargs):
+        if not self.iso:
+            self.iso = get_country(self, 'lat', 'lon', 'iso')
+        if not self.country_name:
+            self.country_name = get_country_name(self, 'lat', 'lon', 'country_name')
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.transmitter_name)
 
 class Station(models.Model):
     freq = models.ForeignKey('Frequency', on_delete=models.DO_NOTHING)
-    country = models.ForeignKey('Country', on_delete=models.DO_NOTHING)
+    #country = models.ForeignKey('Country', on_delete=models.DO_NOTHING)
     station_name = models.ForeignKey('Network', on_delete=models.DO_NOTHING)
     location = models.CharField(max_length=64, blank=True)
     transmitter = models.ForeignKey('Transmitter', on_delete=models.DO_NOTHING)
