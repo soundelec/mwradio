@@ -2,7 +2,7 @@
 {% block title %}{{station.station_name}} - {{station.transmitter}} {{station.freq}} kHz - European Mediumwave Station Guide{% endblock %}
 {% block content %}
     <h5>You are here: <a href="/">Home</a> / <a href="/freq/">Frequencies</a> / <a href="/freq/{{station.freq}}">{{station.freq}} kHz</a> / {{station.station_name}}
-	<h2 class="title"><span class="countryname">{{station.country}}</span> / {{station.station_name}}</h2>
+	<h2 class="title"><span class="countryname">{{station.transmitter.country_name}}</span> / {{station.station_name}}</h2>
 	{% if station.location %}
 		<p><em>{{station.location}}</em></p>
 	{% endif %}

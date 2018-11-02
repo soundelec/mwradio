@@ -19,7 +19,7 @@ class TransmitterAdmin(admin.ModelAdmin):
 admin.site.register(Transmitter, TransmitterAdmin)
 
 class StationAdmin(admin.ModelAdmin):
-    list_display = ('freq', 'station_name', 'location', 'transmitter', 'power')
+    list_display = ('freq', 'station_name', 'subnetwork', 'location', 'transmitter', 'power')
     list_display_links = ('station_name',)
     ordering = ('freq',)
 admin.site.register(Station, StationAdmin)

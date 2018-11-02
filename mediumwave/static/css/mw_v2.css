@@ -60,6 +60,11 @@ a:hover {
     font-weight: 300;
 }
 
+.notes {
+  font-style: italic;
+  font-size: 14px;
+}
+
 .footer {
     bottom: 0;
     width: 100%;

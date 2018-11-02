@@ -62,6 +62,7 @@ class Station(models.Model):
     freq = models.ForeignKey('Frequency', on_delete=models.DO_NOTHING)
     #country = models.ForeignKey('Country', on_delete=models.DO_NOTHING)
     station_name = models.ForeignKey('Network', on_delete=models.DO_NOTHING)
+    subnetwork = models.CharField(max_length=64, blank=True)
     location = models.CharField(max_length=64, blank=True)
     transmitter = models.ForeignKey('Transmitter', on_delete=models.DO_NOTHING)
     power = models.DecimalField(max_digits=12, decimal_places=3)
