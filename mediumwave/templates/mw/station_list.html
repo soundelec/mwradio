@@ -1,6 +1,7 @@
 {% extends 'mw/base.html' %}
 {% block title %}European Mediumwave Station Guide - list by station name{% endblock %}
 {% block content %}
+{% load static %}
     <h5>You are here: <a href="/">Home</a> / Stations</h5>
             {% regroup stations by station_name as stationnames %}
             {% for station_name in stationnames %}
