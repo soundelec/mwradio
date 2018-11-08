@@ -30,18 +30,6 @@ class StationList(ListView):
         context['pages'] = Page.objects.order_by('sortorder')
         return context
 
-#class CountryList(ListView):
-#    context_object_name = 'country_list'
-#    template_name = 'mw/country_list.html'
-#    queryset = Country.objects.order_by('full_name')
-
-#    def get_context_data(self, **kwargs):
-#        context = super(CountryList, self).get_context_data(**kwargs)
-#        context['countries'] = Country.objects.order_by('full_name')
-#        context['widgets'] = TextItem.objects.order_by('sortorder')
-#        context['pages'] = Page.objects.order_by('sortorder')
-#        return context
-
 class LWList(ListView):
     context_object_name = 'freq_list'
     template_name = 'mw/freq_list.html'
@@ -49,7 +37,7 @@ class LWList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(LWList, self).get_context_data(**kwargs)
-        context['stations'] = Station.objects.filter(freq__freq__lt=300).order_by('freq__freq', 'country__iso', 'station_name__network_name', '-power')
+        context['stations'] = Station.objects.filter(freq__freq__lte=300).order_by('freq__freq', 'transmitter__iso', 'station_name__network_name', '-power')
         context['widgets'] = TextItem.objects.order_by('sortorder')
         context['pages'] = Page.objects.order_by('sortorder')
         return context
